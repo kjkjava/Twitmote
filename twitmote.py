@@ -41,7 +41,6 @@ since_id = dom.getElementsByTagName('direct_message')[0]\
 loop_count = 0
 
 # The initial since_id has been set, begin the regular message checking.
-
 while True:
     conn.putrequest('GET', '/direct_messages.xml?since_id='+since_id)
     conn.putheader('Authorization', auth)
@@ -64,8 +63,8 @@ while True:
 	    .getElementsByTagName('id')[0].firstChild.nodeValue
 	loop_count = loop_count + 1
 	print "Just checked: ", loop_count
+    # Don't exceed API rate limit
 	time.sleep(36)
-	# check wait limit
     else:
         print 'There was a problem connecting ("'+\
         `resp.status`+' '+\
